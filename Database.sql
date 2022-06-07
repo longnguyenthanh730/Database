@@ -1,12 +1,15 @@
-SELECT *INTO dbo.DimAccount_NoIndex FROM dbo.DimAccount
-SELECT *INTO dbo.DimAccount_Clustered_Index FROM dbo.DimAccount
-SELECT *INTO dbo.DimAccount_NonClustered_Index FROM dbo.DimAccount
+-- Create Table
+SELECT *INTO Sales.Customer_NoIndex FROM Sales.Customer
+SELECT *INTO Sales.Customer_Clustered_Index FROM Sales.Customer
+SELECT *INTO Sales.Customer_NonClustered_Index FROM Sales.Customer
 
-CREATE INDEX Idx_DimAccount_Index_AccountKey ON dbo.DimAccount_NonClustered_Index(AccountKey)
-CREATE CLUSTERED INDEX Idx_DimAccount_Index_AccountKey ON dbo.DimAccount_Clustered_Index(AccountKey)
+-- Create Index
+CREATE INDEX Idx_Customer_Index_CustomerID 
+ON Sales.Customer_NonClustered_Index(CustomerID)
+CREATE CLUSTERED INDEX Idx_Customer_Index_CustomerID 
+ON Sales.Customer_Clustered_Index(CustomerID)
 
-SELECT * FROM dbo.DimAccount_NoIndex where AccountKey = 47
-SELECT * FROM dbo.DimAccount_NonClustered_Index where AccountKey = 47
-SELECT * FROM dbo.DimAccount_Clustered_Index where AccountKey = 47
-
-
+-- Test Query
+SELECT * FROM Sales.Customer_NoIndex where CustomerID = 50
+SELECT * FROM Sales.Customer_NonClustered_Index where CustomerID = 50
+SELECT * FROM Sales.Customer_Clustered_Index where CustomerID = 50
